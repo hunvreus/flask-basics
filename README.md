@@ -17,9 +17,8 @@ This is a simple starter project for Flask apps (mostly ripped off from [Miguel 
     ```
     pip install -r requirements.txt 
     ```
-4. Create the database:
+4. Create the tables (this will create an `app.db` SQLite file):
     ```
-    flask db init
     flask db upgrade
     ```
 5. Create your local environment configuration file:

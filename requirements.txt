@@ -1,6 +1,6 @@
 email-validator
 Flask
-Flask-Babel
+flask-babel<3
 Flask-Login
 Flask-Mail
 Flask-Migrate
