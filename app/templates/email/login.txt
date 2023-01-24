@@ -1,0 +1,8 @@
+Hi there,
+
+You have requested an email link to sign in to {{ app_name }}. To finish signing in,
+click the link below:
+
+{{ url_for('auth.login_with_token', token=token, _external=True) }}
+
+If you didn’t request this email, please ignore it.

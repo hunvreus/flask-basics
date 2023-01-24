@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import '_macros.html' as macros %}
+
+{% block app_content %}
+<div class="flex items-center mb-4">
+	<div class="flex-1">
+		<h1 class="font-medium text-4xl">{{ _('Posts') }}</h1>
+	</div>
+	<div class="flex-none">
+		<a href="{{ url_for('main.post_add') }}" class="button">{{ _('Add a post') }}</a></td>
+	</div>
+</div>
+
+<div class="table inline-block overflow-x-auto">
+	<table class="min-w-full">
+		<thead>
+			<tr>
+				<th>{{ _('ID') }}</th>
+				<th class="w-full">{{ _('Title') }}</th>
+				<th>{{ _('Created on') }}</th>
+				<th>{{ _('Author') }}</th>
+				<th>{{ _('Actions') }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts.items %}
+			<tr>
+				<td>{{ post.id }}</td>
+				<td class="whitespace-nowrap font-medium"><a href="{{ url_for('main.post_view', id=post.id) }}" class="link">{{ post.title }}</a></td>
+				<td class="max-w-xs text-ellipsis overflow-hidden whitespace-nowrap">{{ post.timestamp.strftime('%d/%m/%Y - %l:%M %p') }}</td>
+				<td class="whitespace-nowrap">{{ post.author.username }}</td>
+				<td><a href="{{ url_for('main.post_edit', id=post.id, next=request.full_path) }}" class="link">{{ _('Edit') }}</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{{ macros.pagination(posts, endpoint, 'mt-4') }}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="max-w-3xl mx-auto">
+    <h1 class="font-medium text-4xl mb-4">{{ _('Edit a profile') }}</h1>
+    <form action="" method="post" novalidate class="card">
+        {{ form.hidden_tag() }}
+        <div class="mb-6">
+            {{ form.email.label(class_="input-label") }}
+            {{ form.email(size=320, class_="w-full") }}
+            
+            {% for error in form.email.errors %}
+            <div class="input-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="mb-6">
+            {{ form.username.label(class_="input-label") }}
+            {{ form.username(size=64, class_="w-full") }}
+            
+            {% for error in form.username.errors %}
+            <div class="input-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {{ form.submit(class_="button button-lg w-full") }}
+    </form>
+</div>
+{% endblock %}

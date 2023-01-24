@@ -1,0 +1,12 @@
+<header class="bg-white border-b border-gray-300 text-gray-700 mb-8">
+	<div class="container px-4 py-2 mx-auto flex items-center">
+		<nav class="flex-auto flex items-center">
+			<a href="{{ url_for('main.index') }}" class="font-bold flex items-center justify-center text-center text-white w-8 h-8 text-sm rounded-lg bg-gray-900 mr-4 block transition">FS</a>
+			<a href="{{ url_for('main.index') }}" class="font-medium px-4 py-2.5 block hover:text-gray-900 transition">{{ _('Posts') }}</a>
+			<a href="{{ url_for('main.about') }}" class="font-medium px-4 py-2.5 block hover:text-gray-900 transition">{{ _('About') }}</a>
+		</nav>
+		<a href="{{ url_for('main.user_view', id=current_user.id) }}" class="align-right">
+			<img class="w-8 h-8 rounded-full" src="{{ current_user.avatar(128) }}" alt="{{ current_user.username }}'s' avatar">
+		</a>
+	</div>
+</header>

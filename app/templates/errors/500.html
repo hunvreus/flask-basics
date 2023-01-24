@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="mt-8 w-full flex items-center justify-center">
+    <div class="max-w-3xl mx-auto">
+        <h1 class="font-medium text-4xl mb-4">{{ _('Something went wrong') }}</h1>
+        <p class="mb-6">{{ _('The server encountered an unexpected condition (error code: 500). The administrator has been notified.') }}</p>
+        <p><a class="button button-lg w-full text-center" href="{{ url_for('main.index') }}">{{ _('Go to main page') }}</a></p>
+    </div>
+</div>
+{% endblock %}

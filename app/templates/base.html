@@ -1,0 +1,49 @@
+<html>
+<head>
+    <!-- Title -->
+    {% block title %}
+    {% if title %}<title>{{ title }} | {{ _('Flask starter') }}</title>
+    {% else %}<title>{{ _('Flask starter') }}</title>{% endif %}
+    {% endblock %}
+    <!-- Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Language" content="en"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ url_for('static', filename='favicon/safari-pinned-tab.svg') }}" color="#5850ec">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="{{ url_for('static', filename='favicon/browserconfig.xml') }}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
+</head>
+<body>
+    <!-- Messages -->
+    {% include '_messages.html' %}
+    
+    <!-- Header -->
+    {% if current_user.is_authenticated %}
+    {% include '_header.html' %}
+    {% endif %}
+
+    <!-- Main -->
+    <main class="container px-4 mx-auto">
+        <!-- Content -->
+        {% block app_content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% if current_user.is_authenticated %}
+    {% include '_footer.html' %}
+    {% endif %}
+    
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

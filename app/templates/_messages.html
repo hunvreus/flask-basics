@@ -1,0 +1,14 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul id="messages">
+{% for message in messages %}
+    <li class="flex border-b border-blue-100 bg-blue-50 px-4 py-2.5 gap-x-2" x-data="{ show: true }" x-show="show">
+        <p class="flex-1">{{ message }}</p>
+        <div class="flex-none">
+            <button class="link" x-on:click="show = !show">{{ _('Close') }}</button>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}

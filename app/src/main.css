@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-gray-900 pb-8;
+}
+
+.link {
+    @apply text-blue-500 hover:text-blue-400 focus:text-blue-600 transition;
+}
+
+/* Table */
+
+.table {
+    @apply inline-block bg-white overflow-x-auto relative rounded-lg border border-gray-300 w-full;
+}
+
+.table table {
+    @apply min-w-full;
+}
+
+.table th,
+.table td {
+    @apply px-3.5 py-3 text-left;
+}
+
+.table th {
+    @apply font-medium;
+}
+
+.table tbody tr {
+    @apply border-t border-gray-300 hover:bg-gray-50 transition;
+}
+
+/* Pagination */
+
+.pagination {
+    @apply flex items-start mt-4;
+}
+
+.pagination-info {
+    @apply hidden md:block;
+}
+
+.pagination-links {
+    @apply flex flex-1 text-right justify-end font-medium;
+}
+
+.pagination-links > * {
+    @apply bg-white px-4 py-2.5 border border-r-0 border-gray-300 hidden md:block;
+}
+
+.pagination-links > *:last-child {
+    @apply border-r rounded-r-lg inline-block;
+}
+
+.pagination-links > *:first-child {
+    @apply rounded-l-lg inline-block;
+}
+
+.pagination-links > *.active {
+    @apply bg-gray-50 font-medium;
+}
+
+.pagination-links > span {
+    @apply text-gray-400;
+}
+
+.pagination-links > a {
+    @apply hover:bg-gray-50;
+}
+
+/* Buttons */
+
+.button {
+    @apply px-4 py-2.5 border border-blue-500 bg-blue-500 hover:bg-blue-400 hover:border-blue-400 focus:bg-blue-600 focus:border-blue-600 font-semibold text-white rounded-lg transition cursor-pointer inline-block;
+}
+
+.button-sm {
+    @apply px-3.5 py-2;
+}
+
+.button-lg {
+    @apply px-5 py-3.5;
+}
+
+.button-secondary {
+    @apply border border-gray-300 bg-white hover:bg-gray-50 hover:border-gray-300 focus:bg-gray-300 focus:bg-gray-100 text-gray-900;
+}
+
+/* Forms */
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='url'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='search'],
+input[type='tel'],
+input[type='checkbox'],
+input[type='radio'],
+select,
+select[multiple],
+textarea {
+    @apply bg-gray-50 border-gray-300 focus:border-blue-500 focus:ring-blue-500;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='url'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'],
+input[type='time'],
+input[type='search'],
+input[type='tel'],
+textarea {
+    @apply px-3.5 py-2.5 rounded-lg;
+}
+
+select,
+select[multiple] {
+    @apply pl-3.5 py-2.5 rounded-lg;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+    @apply text-blue-500;
+}
+
+input[type='checkbox'] {
+    @apply rounded cursor-pointer;
+}
+
+.input-label {
+    @apply block text-sm mb-2;
+}
+
+.input-error {
+    @apply text-sm text-red-600 mt-2;
+}
+
+.card {
+    @apply bg-white p-4 border border-gray-300 rounded-lg;
+}
+
+/* Prose */
+
+.prose h1 {
+    @apply font-medium text-4xl mb-8 mt-8;
+}
+
+.prose h2 {
+    @apply font-medium text-2xl mb-4 mt-8;
+}
+
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    @apply font-medium text-xl mb-4 mt-8;
+}
+
+.prose p,
+.prose ul,
+.prose li {
+    @apply mb-4 mt-4;
+}
+
+.prose pre code {
+    @apply block rounded-lg bg-gray-100 px-4 py-3 mb-4 mt-4;
+}
