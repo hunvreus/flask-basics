@@ -1,49 +1,60 @@
+<!doctype html>
 <html>
 <head>
-    <!-- Title -->
+  <title>
     {% block title %}
-    {% if title %}<title>{{ title }} | {{ _('Flask starter') }}</title>
-    {% else %}<title>{{ _('Flask starter') }}</title>{% endif %}
+    {% if title %}{{ title }} | {{ config.APP_NAME }}{% else %}{{ config.APP_NAME }}{% endif %}
     {% endblock %}
-    <!-- Meta -->
-    <meta charset="utf-8"/>
-    <meta http-equiv="Content-Language" content="en"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
-    <link rel="mask-icon" href="{{ url_for('static', filename='favicon/safari-pinned-tab.svg') }}" color="#5850ec">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="{{ url_for('static', filename='favicon/browserconfig.xml') }}">
-    <meta name="theme-color" content="#ffffff">
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
+  </title>
+  <meta name="title" content="{% if title %}{{ title }} | {{ config.APP_NAME }}{% else %}{{ config.APP_NAME }}{% endif %}">
+  <meta name="description" content="{{ description or config.APP_DESCRIPTION }}">
+  <meta charset="utf-8"/>
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.url }}">
+  <meta property="og:title" content="{% if title %}{{ title }} | {{ config.APP_NAME }}{% else %}{{ config.APP_NAME }}{% endif %}">
+  <meta property="og:description" content="{{ description or config.APP_DESCRIPTION }}">
+  <meta property="og:image" content="{{ social_image or config.APP_SOCIAL_IMAGE }}">
+  <meta property="og:site_name" content="{{ config.APP_NAME }}">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{ request.url }}">
+  <meta name="twitter:title" content="{% if title %}{{ title }} | {{ config.APP_NAME }}{% else %}{{ config.APP_NAME }}{% endif %}">
+  <meta name="twitter:description" content="{{ description or config.APP_DESCRIPTION }}">
+  <meta name="twitter:image" content="{{ social_image or config.APP_SOCIAL_IMAGE }}">
+
+  <!-- Optional but recommended -->
+  <meta name="twitter:creator" content="@hunvreus">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+
+  <!-- JS -->
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  {% block scripts %}{% endblock %}
 </head>
 <body>
-    <!-- Messages -->
-    {% include '_messages.html' %}
-    
-    <!-- Header -->
-    {% if current_user.is_authenticated %}
-    {% include '_header.html' %}
-    {% endif %}
-
-    <!-- Main -->
-    <main class="container px-4 mx-auto">
-        <!-- Content -->
-        {% block app_content %}{% endblock %}
-    </main>
-    
-    <!-- Footer -->
-    {% if current_user.is_authenticated %}
-    {% include '_footer.html' %}
-    {% endif %}
-    
-    <!-- JS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    {% block scripts %}{% endblock %}
+  {% include '_messages.html' %}
+  
+  {% include '_header.html' %}
+  
+  {% block app_content %}{% endblock %}
+  
+  {% include '_footer.html' %}
 </body>
 </html>

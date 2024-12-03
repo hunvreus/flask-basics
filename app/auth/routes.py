@@ -1,12 +1,12 @@
 from flask import render_template, redirect, url_for, flash, request
-from werkzeug.urls import url_parse
+from urllib.parse import urlparse
 from flask_login import login_user, logout_user, current_user
-from flask_babel import _
 from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm
 from app.models import User
 from app.auth.utils import send_login_email, verify_login_token
+from flask_babel import _
 
 
 @bp.route('/logout')
@@ -43,6 +43,6 @@ def login_with_token(token):
             flash(_('Congratulations, you are now a registered user.'))
         login_user(user)
         next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
+        if not next_page or urlparse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(next_page)

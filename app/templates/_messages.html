@@ -1,12 +1,13 @@
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
-<ul id="messages">
-{% for message in messages %}
-    <li class="flex border-b border-blue-100 bg-blue-50 px-4 py-2.5 gap-x-2" x-data="{ show: true }" x-show="show">
-        <p class="flex-1">{{ message }}</p>
-        <div class="flex-none">
-            <button class="link" x-on:click="show = !show">{{ _('Close') }}</button>
-        </div>
+<ul>
+{% for category, message in messages %}
+    <li x-data="{ show: true }" x-show="show">
+        <p>{% if category == 'error' %}ERROR: {% endif %}{{ message }}</p>
+        <button x-on:click="show = !show">
+          <span class="sr-only">Close</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
     </li>
 {% endfor %}
 </ul>

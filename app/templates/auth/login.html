@@ -1,25 +1,19 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<div class="h-full w-full flex items-center justify-center">
-    <div class="max-w-3xl mx-auto">
-        {% if email %}
-        <h1 class="font-medium text-4xl mb-4">{{ _('Check your email') }}</h1>
-        <p>{{ _('We sent an email to you at %(email)s with a link to sign in.', email=email) }}</p>
-        {% else %}
-        <h1 class="font-medium text-4xl mb-4">{{ _('Sign in') }}</h1>
-        <form action="" method="post" novalidate class="card">
-            {{ form.hidden_tag() }}
-            <div class="mb-6">
-                {{ form.email.label(class_="input-label") }}
-                {{ form.email(size=320, class_="w-full") }}
-                {% for error in form.email.errors %}
-                <div class="input-error">{{ error }}</div>
-                {% endfor %}
-            </div>
-            {{ form.submit(class_="button button-lg w-full") }}
-        </form>
-        {% endif %}
-    </div>
-</div>
+{% if email %}
+<h1>{{ 'Check your email' }}</h1>
+<p>{{ _('We sent an email to you at %(email)s with a link to sign in.', email=email) }}</p>
+{% else %}
+<h1>{{ 'Sign in' }}</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.email.label() }}
+    {{ form.email(size=320) }}
+    {% for error in form.email.errors %}
+    <div>{{ error }}</div>
+    {% endfor %}
+    {{ form.submit() }}
+</form>
+{% endif %}
 {% endblock %}
