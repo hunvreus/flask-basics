@@ -26,9 +26,9 @@ env/
 .idea/
 
 # Flask specific files
-*.sqlite3  # if using SQLite for local testing
-*.db       # any other database files
-migrations/ # Flask-Migrate files (optional if you're only deploying)
+*.sqlite3
+*.db
+migrations/
 
 # Node
 node_modules/

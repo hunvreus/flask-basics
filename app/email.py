@@ -23,10 +23,10 @@ def send_email(
         print(f'From: {sender_str}')
         print(f'To: {recipients}')
         print(f'Subject: {subject}')
-        print('--------------- TEXT ---------------')
-        print(text_body)
         print('--------------- HTML ---------------')
         print(html_body)
+        print('--------------- TEXT ---------------')
+        print(text_body)
         print('-----------------------------------')
         return
     

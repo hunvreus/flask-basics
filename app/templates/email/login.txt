@@ -1,8 +1,8 @@
-Hi there,
-
-You have requested an email link to sign in to {{ app_name }}. To finish signing in,
-click the link below:
+Click the button below to sign in to {{ app_name }} with {{ email}}. This link will expire in 10 minutes.
 
 {{ url_for('auth.login_with_token', token=token, _external=True) }}
 
 If you didn’t request this email, please ignore it.
+
+{% if footer %}---
+{{ footer }}{% endif %}

@@ -1,10 +1,14 @@
 {
   "scripts": {
-    "dev": "tailwindcss -i ./app/src/main.css -o ./app/static/styles.css --watch",
-    "build": "tailwindcss -i ./app/src/main.css -o ./app/static/styles.css --minify"
+    "dev": "tailwindcss -i ./src/main.css -o ./app/static/styles.css --watch",
+    "build": "tailwindcss -i ./src/main.css -o ./app/static/styles.css --minify",
+    "email": "mjml src/login.mjml -o app/templates/email/login.html",
+    "favicons": "node src/favicons.js"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.9",
+    "favicons": "^7.2.0",
+    "mjml": "^4.15.3",
     "tailwindcss": "^3.4.15"
   }
 }

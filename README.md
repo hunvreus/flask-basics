@@ -57,7 +57,7 @@ npx tailwindcss -i ./app/src/main.css -o ./app/static/main.css --watch
 
 # Modify tables
 
-Models are defined in the `/app/models.py` file. After making any change you will need to:
+Models are defined in `/app/models.py`. After making any change you will need to:
 
 1. Create the migration script:
     ```

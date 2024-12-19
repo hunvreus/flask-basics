@@ -4,8 +4,8 @@
 	<a href="{{ url_for('main.about') }}">{{ _('About') }}</a>
 	{% if current_user.is_authenticated %}
 		<span>{{ current_user.email }}</span>
-		<a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
+		<a href="{{ url_for('auth.logout') }}">{{ _('Sign out') }}</a>
 	{% else %}
-		<a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
+		<a href="{{ url_for('auth.login') }}">{{ _('Sign in') }}</a>
 	{% endif %}
 </header>

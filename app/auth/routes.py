@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from urllib.parse import urlparse
 from flask_login import login_user, logout_user, current_user
 from app import db
+from sqlalchemy import select
 from app.auth import bp
 from app.auth.forms import LoginForm
 from app.models import User
@@ -22,8 +23,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         send_login_email(form.email.data)
-        return render_template('auth/login.html', email=form.email.data)
-    return render_template('auth/login.html', title=_('Sign in'), form=form)
+        flash(_("We've sent you an email with a link to log in."))
+        return redirect(url_for('main.index'))
+    return render_template('auth/login.html', title=_('Log in'), form=form)
 
 
 @bp.route('/login/<token>', methods=['GET', 'POST'])
@@ -35,9 +37,11 @@ def login_with_token(token):
         flash(_('Invalid token.'))
         return redirect(url_for('main.index'))
     else:
-        user = User.query.filter_by(email=email).first()
+        user = db.session.scalar(
+            select(User).where(User.email == email).limit(1)
+        )
         if user is None:
-            user = User(username=email, email=email)
+            user = User(email=email)
             db.session.add(user)
             db.session.commit()
             flash(_('Congratulations, you are now a registered user.'))

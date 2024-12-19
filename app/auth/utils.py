@@ -16,13 +16,18 @@ def send_login_email(email):
         recipients=[email],
         text_body=render_template(
             'email/login.txt',
+            app_logo=current_app.config['APP_LOGO'],
             app_name=current_app.config['APP_NAME'],
-            token=token
+            email=email,
+            token=token,
+            footer=current_app.config['MAIL_FOOTER']
         ),
         html_body=render_template(
             'email/login.html',
             app_name=current_app.config['APP_NAME'],
-            token=token
+            email=email,
+            token=token,
+            footer=current_app.config['MAIL_FOOTER']
         )
     )
 
