@@ -3,12 +3,13 @@
     "dev": "tailwindcss -i ./src/main.css -o ./app/static/styles.css --watch",
     "build": "tailwindcss -i ./src/main.css -o ./app/static/styles.css --minify",
     "email": "mjml src/login.mjml -o app/templates/email/login.html",
-    "favicons": "node src/favicons.js"
+    "favicons": "node src/favicons.mjs"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.9",
-    "favicons": "^7.2.0",
     "mjml": "^4.15.3",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.15"
   }
 }
