@@ -393,7 +393,7 @@ input[type="color"] {
 }
 
 input[type="file"] {
-  @apply text-muted-foreground text-sm;
+  @apply font-medium;
 }
 
 input[type="file"]::file-selector-button {

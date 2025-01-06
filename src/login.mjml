@@ -12,7 +12,7 @@
     </mj-section>
     <mj-section background-color="#fff" border-radius="24px">
       <mj-column>
-        <mj-image src="{{ url_for('static', filename=mail_logo, _external=True) }}" border-radius="12px" height="36px" width="36px" align="left" />
+        <mj-image src="{{ url_for('static', filename=mail_logo, _external=True) }}" height="36px" width="36px" align="left" />
         <mj-text font-size="28px" font-weight="600">Sign in to {{ app_name }}</mj-text>
         <mj-text>Click the button below to sign in to {{ app_name }} with {{ email}}. This link will expire in 10 minutes.</mj-text>
         <mj-button align="left" background-color="#171717" color="#fff" border-radius="24px" font-weight="500" href="{{ url_for('auth.login_with_token', token=token, _external=True) }}">Sign in to {{ app_name }}</mj-button>

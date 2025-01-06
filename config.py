@@ -17,7 +17,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SENDER_NAME = os.environ.get('MAIL_SENDER_NAME') or APP_NAME
     MAIL_SENDER_EMAIL = os.environ.get('MAIL_SENDER_EMAIL') or 'noreply@example.com'
-    MAIL_LOGO = os.environ.get('MAIL_LOGO') or '/favicon-96x96.png'
+    MAIL_LOGO = os.environ.get('MAIL_LOGO') or '/assets/logo/logo-72x72.png'
     MAIL_FOOTER = os.environ.get('MAIL_FOOTER')
     RESEND_API_KEY = os.environ.get('RESEND_API_KEY')
     TEMPLATES_AUTO_RELOAD = os.environ.get('TEMPLATES_AUTO_RELOAD') or False

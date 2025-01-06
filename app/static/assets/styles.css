@@ -1764,9 +1764,7 @@ input[type="color"] {
 }
 
 input[type="file"] {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: hsl(var(--muted-foreground));
+  font-weight: 500;
 }
 
 input[type="file"]::file-selector-button {

@@ -16,6 +16,7 @@ async function generateLogoImages() {
       { width: 240, height: 240, name: 'logo-240x240.png' },
       { width: 120, height: 120, name: 'logo-120x120.png' },
       { width: 96, height: 96, name: 'logo-96x96.png' },
+      { width: 72, height: 72, name: 'logo-72x72.png' },
       { width: 48, height: 48, name: 'logo-48x48.png' },
       { width: 24, height: 24, name: 'logo-24x24.png' }
     ];
