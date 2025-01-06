@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="container max-w-screen-lg mx-auto px-4 py-16 prose">
+    <h1>{{ title }}</h1>
+
+    <h2>Typography</h2>
+
+    <p>This is a regular paragraph with the regular styles and inline elements: <strong>bold text</strong>, <em>italic text</em>, <a href="#">links</a> and <code>inline code</code>.</p>
+
+    <p>Here are some headings:</p>
+
+    <div class="h1">Heading 1</div>
+    <div class="h2">Heading 2</div>
+    <div class="h3">Heading 3</div>
+    <div class="h4">Heading 4</div>
+    <div class="h5">Heading 5</div>
+    <div class="h6">Heading 6</div>
+
+    <h2>Lists</h2>
+
+    <p>This is an ordered list:</p>
+
+    <ol>
+        <li>First item.</li>
+        <li>
+            Second item.
+            <ol>
+                <li>First subitem.</li>
+                <li>Second subitem.</li>
+            </ol>
+        </li>
+        <li>Third item.</li>
+    </ol>
+
+    <p>This is an unordered list:</p>
+
+    <ul>
+        <li>First item.</li>
+        <li>
+            Second item.
+            <ul>
+                <li>First subitem.</li>
+                <li>Second subitem.</li>
+            </ul>
+        </li>
+        <li>Third item.</li>
+    </ul>
+
+    <h2>Blockquote</h2>
+
+    <blockquote>
+        <p>A pretty regular blocquote, nothing special, but I'm sure you'll find something amazing to shove in there.</p>
+    </blockquote>
+
+    <h2>Code block</h2>
+
+    <pre><code>#header h1 a {
+    display: block;
+    width: 300px;
+    height: 80px;
+}</code></pre>
+
+
+    <h2>Table</h2>
+
+    <div class="w-full overflow-x-auto">
+        <table class="w-full text-nowrap">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sarah Chen</td>
+                    <td>sarah.chen@example.com</td>
+                    <td>Admin</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline ">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Marcus Rodriguez</td>
+                    <td>m.rodriguez@example.com</td>
+                    <td>Member</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Emma Thompson</td>
+                    <td>emma.t@example.com</td>
+                    <td>Member</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Aiden Patel</td>
+                    <td>a.patel@example.com</td>
+                    <td>Admin</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lisa Kim</td>
+                    <td>l.kim@example.com</td>
+                    <td>Guest</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>James Wilson</td>
+                    <td>jwilson@example.com</td>
+                    <td>Member</td>
+                    <td>
+                        <a href="#" class="text-primary hover:underline">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Buttons</h2>
+
+    <div class="grid grid-cols-4 gap-4 text-center">
+        <div><button class="btn-sm-primary">Primary</button></div>
+        <div><button class="btn-sm-secondary">Secondary</button></div>
+        <div><button class="btn-sm-accent">Accent</button></div>
+        <div><button class="btn-sm-danger">Danger</button></div>
+        <div><button class="btn-primary">Primary</button></div>
+        <div><button class="btn-secondary">Secondary</button></div>
+        <div><button class="btn-accent">Accent</button></div>
+        <div><button class="btn-danger">Danger</button></div>
+        <div><button class="btn-lg-primary">Primary</button></div>
+        <div><button class="btn-lg-secondary">Secondary</button></div>
+        <div><button class="btn-lg-accent">Accent</button></div>
+        <div><button class="btn-lg-danger">Danger</button></div>
+    </div>
+
+    <h2>Dialog</h2>
+
+    <button class="btn-primary" x-on:click="open = true">
+        Open dialog
+    </button>
+
+    <!-- <dialog class="dialog" x-data="{ open: false }" x-show="open" x-on:close="open = false">
+        <article>
+            <header class="flex justify-between items-center">
+                <span class="font-semibold">Add a new event</span>
+                <button aria-label="Close" class="btn-sm-secondary h-8 w-8 px-0 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </header>
+            <div class="prose">
+                <p>We're excited to have you join us for our
+                upcoming event. Please arrive at the museum 
+                on time to check in and get started.</p>
+                <ul>
+                    <li>Date: Saturday, April 15</li>
+                    <li>Time: 10:00am - 12:00pm</li>
+                </ul>
+            </div>
+            <footer>
+                <button class="btn-sm-primary">Confirm</button>
+            </footer>
+        </article>
+    </dialog> -->
+
+    <h2>Forms</h2>
+
+    <div class="form">
+        <fieldset class="fieldset space-y-4">
+            <legend>Inputs</legend>
+            <div class="field">
+                <label class="label">Text</label>
+                <input type="text" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <input type="email" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <input type="password" class="input">
+            </div>
+            <div class="field">
+                <label class="label">URL</label>
+                <input type="url" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Number</label>
+                <input type="number" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Tel</label>
+                <input type="tel" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Search</label>
+                <input type="search" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Time</label>
+                <input type="time" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Date</label>
+                <input type="date" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Datetime-local</label>
+                <input type="datetime-local" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Week</label>
+                <input type="week" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Month</label>
+                <input type="month" class="input">
+            </div>
+            <div class="field">
+                <label class="label">Textarea</label>
+                <textarea class="input" rows="6"></textarea>
+            </div>
+            <div class="field">
+                <label class="label">File</label>
+                <input type="file" class="input" multiple>
+            </div>
+            <div class="field">
+                <label class="label">Checkbox</label>
+                <input type="checkbox" name="checkbox">slain be
+            </div>
+            <div class="field">
+                <label class="label">Switch</label>
+                <input type="checkbox" name="switch" class="input" role="switch">
+            </div>
+            <div class="field">
+                <label class="label">Color</label>
+                <input type="color">
+            </div>
+            <div class="field">
+                <label class="label">Radio</label>
+                <label><input type="radio" name="radio">Yes</label>
+                <label><input type="radio" name="radio">No</label>
+                <label><input type="radio" name="radio">Maybe</label>
+            </div>
+            <div class="field">
+                <label class="label">Range</label>
+                <input type="range" class="range"/>
+            </div>
+            <div class="field">
+                <label class="label">Button</label>
+                <input type="button" value="Button" class="btn">
+            </div>
+            <div class="field">
+                <label class="label">Reset</label>
+                <input type="reset" value="Reset" class="btn">
+            </div>
+            <div class="field">
+                <label class="label">Submit</label>
+                <input type="submit" value="Submit" class="btn">
+            </div>
+            <div class="field">
+                <label class="label">Select</label>
+                <select class="input">
+                    <optgroup label="Fruits">
+                        <option>Orange</option>
+                        <option>Apple</option>
+                        <option>Strawberry</option>
+                    </optgroup>
+                    <optgroup label="Vegetables">
+                        <option>Carrot</option>
+                        <option>Potato</option>
+                        <option>Tomato</option>
+                    </optgroup>
+                </select>
+            </div>
+        </fieldset>
+    </div>
+</div>
+{% endblock %}

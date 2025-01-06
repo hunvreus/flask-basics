@@ -9,7 +9,6 @@ def index():
     return render_template('index.html', title=_('Home'))
 
 
-@bp.route('/about.html')
-@login_required
-def about():
-    return render_template('about.html',  title='About')
+@bp.route('/kitchen-sink.html')
+def kitchen_sink():
+    return render_template('kitchen-sink.html',  title='Kitchen sink')

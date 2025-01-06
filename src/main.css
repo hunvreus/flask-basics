@@ -1,3 +1,401 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./components/button.css";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 54.5%;
+    --danger: 0 84% 60%;
+    --danger-foreground: 0 0% 100%;
+    --border: 240 5.9% 90%;
+    --input: 0 0% 90%;
+    --ring: 240 5% 64.9%;
+    --radius: 0.5rem;
+  }
+
+  /*
+  --neutral-50:   0 0% 98%;    #fafafa
+  --neutral-100:  0 0% 96%;    #f5f5f5
+  --neutral-150:  0 0% 93%;    interpolated
+  --neutral-200:  0 0% 90%;    #e5e5e5
+  --neutral-250:  0 0% 86.5%;  interpolated
+  --neutral-300:  0 0% 83%;    #d4d4d4
+  --neutral-350:  0 0% 73.5%;  interpolated
+  --neutral-400:  0 0% 64%;    #a3a3a3
+  --neutral-450:  0 0% 54.5%;  interpolated
+  --neutral-500:  0 0% 45%;    #737373
+  --neutral-550:  0 0% 38.5%;  interpolated
+  --neutral-600:  0 0% 32%;    #525252
+  --neutral-650:  0 0% 28.5%;  interpolated
+  --neutral-700:  0 0% 25%;    #404040
+  --neutral-750:  0 0% 20%;    #262626
+  --neutral-800:  0 0% 15%;    #171717
+  --neutral-850:  0 0% 12%;    #0a0a0a
+  --neutral-900:  0 0% 9%;     #0a0a0a
+  --neutral-950:  0 0% 4%;     #0a0a0a
+  */
+
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 3.9%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --popover: 0 0% 14.9%;
+    --popover-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --danger: 0 62.8% 30.6%;
+    --danger-foreground: 0 85.7% 97.3%;
+    --border: 0 0% 25.1%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground overscroll-none antialiased relative;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  @supports (font: -apple-system-body) and (-webkit-appearance: none) {
+    [data-wrapper] {
+      @apply min-[1800px]:border-t;
+    }
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 5px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* Button */
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-accent,
+  .btn-danger,
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-sm-secondary,
+  .btn-sm-accent,
+  .btn-sm-danger,
+  .btn-lg,
+  .btn-lg-primary,
+  .btn-lg-secondary,
+  .btn-lg-accent,
+  .btn-lg-danger {
+    @apply border rounded-full font-semibold cursor-pointer transition-colors inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+  }
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-accent,
+  .btn-danger {
+    @apply px-5 py-2.5;
+  }
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-sm-secondary,
+  .btn-sm-accent,
+  .btn-sm-danger {
+    @apply px-3 py-1.5 text-sm;
+  }
+  .btn-lg,
+  .btn-lg-primary,
+  .btn-lg-secondary,
+  .btn-lg-accent,
+  .btn-lg-danger {
+    @apply px-7 py-3;
+  }
+  .btn,
+  .btn-primary,
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-lg,
+  .btn-lg-primary {
+    @apply border-primary bg-primary text-primary-foreground hover:bg-primary/90 hover:border-primary/90;
+  }
+  .btn-secondary,
+  .btn-sm-secondary,
+  .btn-lg-secondary {
+    @apply bg-background border-border hover:bg-muted;
+  }
+  .btn-accent,
+  .btn-sm-accent,
+  .btn-lg-accent {
+    @apply border-accent bg-accent text-accent-foreground hover:bg-accent/90 hover:border-accent/90;
+  }
+  .btn-danger,
+  .btn-sm-danger,
+  .btn-lg-danger {
+    @apply border-danger bg-danger text-danger-foreground hover:bg-danger/90 hover:border-danger/90;
+  }
+}
+
+/* Forms */
+@layer components {
+  .field {
+    @apply flex flex-col gap-y-2;
+  }
+  .label {
+    @apply font-medium text-sm;
+  }
+  .input[type="text"],
+  .input[type="email"],
+  .input[type="password"],
+  .input[type="number"],
+  .input[type="tel"],
+  .input[type="url"],
+  .input[type="search"],
+  .input[type="date"],
+  .input[type="time"],
+  .input[type="datetime-local"],
+  .input[type="month"],
+  .input[type="week"],
+  select.input,
+  textarea.input {
+    @apply bg-input border-0 px-3.5 py-2.5 rounded-xl font-medium focus:ring-2 focus:ring-primary;
+  }
+  .input::placeholder {
+    @apply text-muted-foreground;
+  }
+  select.input {
+    @apply cursor-pointer;
+  }
+  .input-error {
+    @apply ring-2 ring-danger focus:ring-danger
+  }
+  input[type="checkbox"] {
+    @apply border-input bg-input rounded-md cursor-pointer checked:bg-primary focus:ring-primary hover:focus:ring-primary/90 focus:hover:ring-primary/90;
+  }
+  .input[type="checkbox"][role="switch"] {
+    @apply w-10 h-6 p-0.5 border-input bg-input rounded-full checked:bg-none checked:bg-primary checked:border-primary before:block before:aspect-square before:h-full before:shadow before:rounded-full before:bg-white before:content-[''] before:transition-all checked:before:ms-4 focus:ring-primary;
+}
+}
+
+/* Typography */
+@layer components {
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    @apply font-bold leading-tight tracking-tight;
+  }
+  .h1 {
+    @apply text-5xl;
+  }
+  .h2 {
+    @apply text-3xl;
+  }
+  .h3 {
+    @apply text-xl;
+  }
+  .h4,
+  .h5,
+  .h6 {
+    @apply text-base;
+  }
+  .link {
+    @apply text-accent hover:underline font-medium;
+  }
+  .code {
+    @apply bg-muted text-sm rounded-lg px-1.5 py-0.5;
+  }
+  .code-block {
+    @apply bg-muted border-border rounded-xl;
+  }
+  .code-block code {
+    @apply inline-block p-4 text-sm font-mono;
+  }
+  .quote {
+    @apply border-l-4 border-border pl-4;
+  }
+  .ordered-list,
+  .unordered-list ol,
+  .ordered-list ol {
+    @apply list-decimal list-outside ps-6;
+  }
+  .unordered-list,
+  .unordered-list ul,
+  .ordered-list ul {
+    @apply list-disc list-outside ps-6;
+  }
+}
+
+/* Tables */
+@layer components {
+  .table {
+    @apply text-left;
+  }
+  .table tr:hover {
+    @apply bg-muted/50;
+  }
+  .table th,
+  .table td {
+    @apply p-2 border-b border-border;
+  }
+  .table thead th {
+    @apply text-sm font-medium;
+  }
+  .table tbody th,
+  .table tfoot th {
+    @apply font-semibold;
+  }
+  .table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+}
+
+/* Card */
+@layer components {
+  .card {
+    @apply border border-border rounded-xl;
+  }
+  .card header {
+    @apply p-4;
+  }
+}
+
+/* Dialog */
+@layer components {
+  .dialog {
+    @apply inset-0 fixed bg-foreground/90 h-screen w-screen flex items-center justify-center;
+  }
+  .dialog > article {
+    @apply bg-background shadow-xl rounded-xl p-4 max-w-lg;
+  }
+  .dialog > article > header {
+    @apply flex justify-between items-center -mt-4 -mx-4 px-4 py-2.5 mb-2.5 border-b border-border;
+  }
+  .dialog > article > footer {
+    @apply flex justify-end items-center -mb-4 -mx-4 px-4 py-2.5 mt-2.5;
+  }
+}
+
+/* Prose */
+@layer components {
+  .prose h1 {
+    @apply h1 mb-8;
+  }
+  .prose h2 {
+    @apply h2 mt-8 mb-6;
+  }
+  .prose h3 {
+    @apply h3 mt-6 mb-4;
+  }
+  .prose h4 {
+    @apply h4 my-4;
+  }
+  .prose h5 {
+    @apply h5 my-4;
+  }
+  .prose h6 {
+    @apply h6 my-4;
+  }
+  .prose > p,
+  .prose > blockquote,
+  .prose > ul,
+  .prose > ol,
+  .prose > dl,
+  .prose > table,
+  .prose > pre,
+  .prose > p {
+    @apply my-4;
+  }
+  .prose > *:last-child {
+    @apply !mb-0;
+  }
+  .prose a {
+    @apply link;
+  }
+  .prose table {
+    @apply table;
+  }
+  .prose pre:has(> code) {
+    @apply code-block;
+  }
+  .prose code {
+    @apply code;
+  }
+  .prose blockquote {
+    @apply quote;
+  }
+  .prose ul {
+    @apply unordered-list;
+  }
+  .prose ol {
+    @apply ordered-list;
+  }
+  .prose strong,
+  .prose b {
+    @apply font-semibold;
+  }
+}
+
+input[type="color"] {
+  @apply aspect-square w-10 h-10 border-2 border-border rounded-lg;
+}
+
+.input[type="radio"] {
+  @apply outline-none appearance-none border-blue-400;
+}
+
+input[type="file"] {
+  @apply text-muted-foreground text-sm;
+}
+
+input[type="file"]::file-selector-button {
+  @apply btn-sm-secondary mr-2 border-solid;
+}

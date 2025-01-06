@@ -6,4 +6,4 @@ from flask_babel import lazy_gettext as _l
 
 class LoginForm(FlaskForm):
     email = StringField(_l('Email'), validators=[DataRequired(), Email()])
-    submit = SubmitField(_l('Sign in with email'))
+    submit = SubmitField(_l('Sign in'))

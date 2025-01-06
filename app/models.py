@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.email)
 
+    @property
     def avatar(self):
         return f'https://unavatar.io/{self.email.lower()}'
 

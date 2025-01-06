@@ -1,19 +1,28 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-{% if email %}
-<h1>{{ 'Check your email' }}</h1>
-<p>{{ _('We sent an email to you at %(email)s with a link to sign in.', email=email) }}</p>
-{% else %}
-<h1>{{ 'Sign in' }}</h1>
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    {{ form.email.label() }}
-    {{ form.email(size=320) }}
-    {% for error in form.email.errors %}
-    <div>{{ error }}</div>
-    {% endfor %}
-    {{ form.submit() }}
-</form>
-{% endif %}
+<div class="flex items-center justify-center h-screen">
+    <div class="max-w-md w-full space-y-0">
+        {% if email %}
+        <h1>{{ 'Check your email' }}</h1>
+        <p>{{ _('We sent an email to you at %(email)s with a link to sign in.', email=email) }}</p>
+        {% else %}
+        <h1 class="text-center text-3xl font-semibold">{{ 'Sign in' }}</h1>
+        <form action="" method="post" novalidate class="space-y-4">
+            {{ form.hidden_tag() }}
+            <div class="space-y-2">
+                {{ form.email(
+                    size=320,
+                    class="w-full " + ("input-error" if form.email.errors else "input"),
+                    placeholder="Enter your email address"
+                ) }}
+                {% for error in form.email.errors %}
+                <p class="text-danger text-sm font-medium">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-primary w-full", value="Email me a link") }}
+        </form>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

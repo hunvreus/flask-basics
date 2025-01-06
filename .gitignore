@@ -28,7 +28,6 @@ env/
 # Flask specific files
 *.sqlite3
 *.db
-migrations/
 
 # Node
 node_modules/
