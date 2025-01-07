@@ -756,7 +756,7 @@ select {
   --primary-foreground: 0 0% 98%;
   --secondary: 240 4.8% 95.9%;
   --secondary-foreground: 240 5.9% 10%;
-  --accent: 25 95% 53%;
+  --accent: 217 91% 60%;
   --accent-foreground: 0 0% 100%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
@@ -766,6 +766,7 @@ select {
   --danger-foreground: 0 0% 100%;
   --border: 240 5.9% 90%;
   --input: 0 0% 90%;
+  --input-placeholder: 0 0% 54.5%;
   --ring: 240 5% 64.9%;
   --radius: 0.5rem;
 }
@@ -791,6 +792,26 @@ select {
   --neutral-900:  0 0% 9%;     #0a0a0a
   --neutral-950:  0 0% 4%;     #0a0a0a
   */
+
+/* .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 3.9%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --popover: 0 0% 14.9%;
+    --popover-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --danger: 0 62.8% 30.6%;
+    --danger-foreground: 0 85.7% 97.3%;
+    --border: 0 0% 25.1%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  } */
 
 * {
   border-color: hsl(var(--border));
@@ -1030,6 +1051,10 @@ body {
 }
 
 .label {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
@@ -1047,10 +1072,16 @@ body {
   .input[type="datetime-local"],
   .input[type="month"],
   .input[type="week"],
+  .input[type="checkbox"],
+  .input[type="radio"],
   select.input,
-  textarea.input {
+  .form select,
+  textarea.input,
+  .form textarea,
+  .input[type="file"] {
   border-radius: 0.75rem;
-  border-width: 0px;
+  border-width: 1px;
+  border-color: hsl(var(--input));
   background-color: hsl(var(--input));
   padding-left: 0.875rem;
   padding-right: 0.875rem;
@@ -1071,23 +1102,32 @@ body {
   .input[type="datetime-local"]:focus,
   .input[type="month"]:focus,
   .input[type="week"]:focus,
+  .input[type="checkbox"]:focus,
+  .input[type="radio"]:focus,
   select.input:focus,
-  textarea.input:focus {
+  .form select:focus,
+  textarea.input:focus,
+  .form textarea:focus,
+  .input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: hsl(var(--primary));
 }
 
-.input::-moz-placeholder {
-  color: hsl(var(--muted-foreground));
+.input::-moz-placeholder, .form textarea::-moz-placeholder {
+  color: hsl(var(--input-placeholder));
 }
 
-.input::placeholder {
-  color: hsl(var(--muted-foreground));
+.input::placeholder,
+  .form textarea::placeholder {
+  color: hsl(var(--input-placeholder));
 }
 
-select.input {
+select.input,
+  .form select {
   cursor: pointer;
 }
 
@@ -1102,27 +1142,22 @@ select.input {
   --tw-ring-color: hsl(var(--danger));
 }
 
-input[type="checkbox"] {
+.input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
   cursor: pointer;
-  border-radius: 0.375rem;
-  border-color: hsl(var(--input));
-  background-color: hsl(var(--input));
+  border-radius: 0.5rem;
+  padding: 0px;
 }
 
-input[type="checkbox"]:checked {
+.input[type="checkbox"]:checked {
+  border-color: hsl(var(--primary));
   background-color: hsl(var(--primary));
 }
 
-input[type="checkbox"]:focus {
-  --tw-ring-color: hsl(var(--primary));
-}
-
-input[type="checkbox"]:focus:hover {
-  --tw-ring-color: hsl(var(--primary) / 0.9);
-}
-
-input[type="checkbox"]:hover:focus {
-  --tw-ring-color: hsl(var(--primary) / 0.9);
+.input[type="checkbox"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
 }
 
 .input[type="checkbox"][role="switch"] {
@@ -1162,8 +1197,912 @@ input[type="checkbox"]:hover:focus {
   margin-inline-start: 1rem;
 }
 
+.input[type="checkbox"][role="switch"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
 .input[type="checkbox"][role="switch"]:focus {
   --tw-ring-color: hsl(var(--primary));
+}
+
+.input[type="radio"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.input[type="radio"]:checked {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary));
+}
+
+.input[type="radio"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.input[type="file"] {
+  cursor: pointer;
+}
+
+.input[type="file"]::file-selector-button {
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  font-weight: 600;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.input[type="file"]::file-selector-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.input[type="file"]::file-selector-button {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-color: hsl(var(--border));
+  background-color: hsl(var(--background));
+}
+
+.input[type="file"]::file-selector-button:hover {
+  background-color: hsl(var(--muted));
+}
+
+.input[type="file"]::file-selector-button {
+  margin-top: -0.625rem;
+  margin-bottom: -0.625rem;
+  margin-left: -0.875rem;
+  margin-right: 0.875rem;
+  border-radius: 0.75rem;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-style: solid;
+}
+
+.input[type="range"] {
+  height: 1.5rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.input[type="range"]::-webkit-slider-thumb {
+  margin: 0px;
+  margin-top: -0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+          appearance: none;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.input[type="range"]::-webkit-slider-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.input[type="range"]:focus::-webkit-slider-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.input[type="range"]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--input));
+}
+
+.input[type="range"]::-moz-range-thumb {
+  margin: 0px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -moz-appearance: none;
+       appearance: none;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.input[type="range"]::-moz-range-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.input[type="range"]:focus::-moz-range-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.input[type="range"]::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--input));
+}
+
+.input[type="range"]::-ms-thumb {
+  margin: 0px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.input[type="range"]::-ms-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.input[type="range"]:focus::-ms-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.input[type="range"]::-ms-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--input));
+  color: transparent;
+}
+
+.input[type="range"]::-ms-fill-lower {
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+}
+
+.input[type="range"]::-ms-fill-upper {
+  border-radius: 9999px;
+  background-color: hsl(var(--input));
+}
+
+.form label {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="text"],.form input[type="email"],.form input[type="password"],.form input[type="number"],.form input[type="tel"],.form input[type="url"],.form input[type="search"],.form input[type="date"],.form input[type="time"],.form input[type="datetime-local"],.form input[type="month"],.form input[type="week"],.form input[type="checkbox"],.form input[type="radio"],
+  select.form input,
+  textarea.form input,.form input[type="file"] {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 500;
+}
+
+.form input[type="text"]:focus,.form input[type="email"]:focus,.form input[type="password"]:focus,.form input[type="number"]:focus,.form input[type="tel"]:focus,.form input[type="url"]:focus,.form input[type="search"]:focus,.form input[type="date"]:focus,.form input[type="time"]:focus,.form input[type="datetime-local"]:focus,.form input[type="month"]:focus,.form input[type="week"]:focus,.form input[type="checkbox"]:focus,.form input[type="radio"]:focus,
+  select.form input:focus,
+  textarea.form input:focus,.form input[type="file"]:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input::-moz-placeholder {
+  color: hsl(var(--input-placeholder));
+}
+
+.form input::placeholder {
+  color: hsl(var(--input-placeholder));
+}
+
+select.form input {
+  cursor: pointer;
+}
+
+.form input[type="checkbox"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0px;
+}
+
+.form input[type="checkbox"]:checked {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary));
+}
+
+.form input[type="checkbox"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.form input[type="checkbox"][role="switch"] {
+  height: 1.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--input));
+  padding: 0.125rem;
+}
+
+.form input[type="checkbox"][role="switch"]::before {
+  display: block;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.form input[type="checkbox"][role="switch"]:checked {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary));
+  background-image: none;
+}
+
+.form input[type="checkbox"][role="switch"]:checked::before {
+  content: var(--tw-content);
+  margin-inline-start: 1rem;
+}
+
+.form input[type="checkbox"][role="switch"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.form input[type="checkbox"][role="switch"]:focus {
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.form input[type="radio"] {
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.form input[type="radio"]:checked {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary));
+}
+
+.form input[type="radio"]:checked:hover {
+  border-color: hsl(var(--primary) / 0.9);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.form input[type="file"] {
+  cursor: pointer;
+}
+
+.form input[type="file"]::file-selector-button {
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border-width: 1px;
+  font-weight: 600;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.form input[type="file"]::file-selector-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.form input[type="file"]::file-selector-button {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-color: hsl(var(--border));
+  background-color: hsl(var(--background));
+}
+
+.form input[type="file"]::file-selector-button:hover {
+  background-color: hsl(var(--muted));
+}
+
+.form input[type="file"]::file-selector-button {
+  margin-top: -0.625rem;
+  margin-bottom: -0.625rem;
+  margin-left: -0.875rem;
+  margin-right: 0.875rem;
+  border-radius: 0.75rem;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-style: solid;
+}
+
+.form input[type="range"] {
+  height: 1.5rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form input[type="range"]::-webkit-slider-thumb {
+  margin: 0px;
+  margin-top: -0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+          appearance: none;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form input[type="range"]::-webkit-slider-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.form input[type="range"]:focus::-webkit-slider-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.form input[type="range"]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--input));
+}
+
+.form input[type="range"]::-moz-range-thumb {
+  margin: 0px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -moz-appearance: none;
+       appearance: none;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form input[type="range"]::-moz-range-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.form input[type="range"]:focus::-moz-range-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.form input[type="range"]::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--input));
+}
+
+.form input[type="range"]::-ms-thumb {
+  margin: 0px;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--primary));
+  padding: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.form input[type="range"]::-ms-thumb:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.form input[type="range"]:focus::-ms-thumb {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: hsl(var(--primary));
+  --tw-ring-offset-width: 2px;
+}
+
+.form input[type="range"]::-ms-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  border-width: 0px;
+  background-color: hsl(var(--input));
+  color: transparent;
+}
+
+.form input[type="range"]::-ms-fill-lower {
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+}
+
+.form input[type="range"]::-ms-fill-upper {
+  border-radius: 9999px;
+  background-color: hsl(var(--input));
 }
 
 .h1,
@@ -1743,72 +2682,6 @@ input[type="checkbox"]:hover:focus {
 /* Dialog */
 
 /* Prose */
-
-input[type="color"] {
-  aspect-ratio: 1 / 1;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 0.5rem;
-  border-width: 2px;
-  border-color: hsl(var(--border));
-}
-
-.input[type="radio"] {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  --tw-border-opacity: 1;
-  border-color: rgb(96 165 250 / var(--tw-border-opacity, 1));
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-input[type="file"] {
-  font-weight: 500;
-}
-
-input[type="file"]::file-selector-button {
-  display: inline-flex;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  border-width: 1px;
-  font-weight: 600;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-input[type="file"]::file-selector-button:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-  --tw-ring-color: hsl(var(--primary));
-  --tw-ring-offset-width: 2px;
-}
-
-input[type="file"]::file-selector-button {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  border-color: hsl(var(--border));
-  background-color: hsl(var(--background));
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: hsl(var(--muted));
-}
-
-input[type="file"]::file-selector-button {
-  margin-right: 0.5rem;
-  border-style: solid;
-}
 
 .hover\:text-inherit:hover {
   color: inherit;

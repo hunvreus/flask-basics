@@ -12,7 +12,7 @@
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --accent: 25 95% 53%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
@@ -22,6 +22,7 @@
     --danger-foreground: 0 0% 100%;
     --border: 240 5.9% 90%;
     --input: 0 0% 90%;
+    --input-placeholder: 0 0% 54.5%;
     --ring: 240 5% 64.9%;
     --radius: 0.5rem;
   }
@@ -48,7 +49,7 @@
   --neutral-950:  0 0% 4%;     #0a0a0a
   */
 
-  .dark {
+  /* .dark {
     --background: 0 0% 9%;
     --foreground: 0 0% 98%;
     --primary: 0 0% 98%;
@@ -66,6 +67,28 @@
     --border: 0 0% 25.1%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+  } */
+
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 54.5%;
+    --danger: 0 84% 60%;
+    --danger-foreground: 0 0% 100%;
+    --border: 240 5.9% 90%;
+    --input: 0 0% 90%;
+    --input-placeholder: 0 0% 54.5%;
+    --ring: 240 5% 64.9%;
+    --radius: 0.5rem;
   }
 }
 
@@ -188,7 +211,7 @@
     @apply flex flex-col gap-y-2;
   }
   .label {
-    @apply font-medium text-sm;
+    @apply font-medium text-sm flex items-center gap-x-2;
   }
   .input[type="text"],
   .input[type="email"],
@@ -202,25 +225,84 @@
   .input[type="datetime-local"],
   .input[type="month"],
   .input[type="week"],
+  .input[type="checkbox"],
+  .input[type="radio"],
   select.input,
-  textarea.input {
-    @apply bg-input border-0 px-3.5 py-2.5 rounded-xl font-medium focus:ring-2 focus:ring-primary;
+  .form select,
+  textarea.input,
+  .form textarea,
+  .input[type="file"] {
+    @apply bg-input border border-input px-3.5 py-2.5 rounded-xl font-medium focus:ring-2 focus:ring-primary focus:outline-none;
   }
-  .input::placeholder {
-    @apply text-muted-foreground;
+  .input::placeholder,
+  .form textarea::placeholder {
+    @apply text-input-placeholder;
   }
-  select.input {
+  select.input,
+  .form select {
     @apply cursor-pointer;
   }
   .input-error {
     @apply ring-2 ring-danger focus:ring-danger
   }
-  input[type="checkbox"] {
-    @apply border-input bg-input rounded-md cursor-pointer checked:bg-primary focus:ring-primary hover:focus:ring-primary/90 focus:hover:ring-primary/90;
+  .input[type="checkbox"] {
+    @apply h-6 w-6 p-0 rounded-lg cursor-pointer checked:bg-primary checked:border-primary hover:checked:bg-primary/90 hover:checked:border-primary/90;
   }
   .input[type="checkbox"][role="switch"] {
-    @apply w-10 h-6 p-0.5 border-input bg-input rounded-full checked:bg-none checked:bg-primary checked:border-primary before:block before:aspect-square before:h-full before:shadow before:rounded-full before:bg-white before:content-[''] before:transition-all checked:before:ms-4 focus:ring-primary;
-}
+    @apply w-10 h-6 p-0.5 border-input bg-input rounded-full checked:bg-none checked:bg-primary checked:border-primary hover:checked:bg-primary/90 hover:checked:border-primary/90 before:block before:aspect-square before:h-full before:shadow before:rounded-full before:bg-white before:content-[''] before:transition-all checked:before:ms-4 focus:ring-primary;
+  }
+  .input[type="radio"] {
+    @apply h-6 w-6 p-0 checked:bg-primary checked:border-primary cursor-pointer hover:checked:bg-primary/90 hover:checked:border-primary/90;
+  }
+  .input[type="file"] {
+    @apply cursor-pointer;
+  }
+  .input[type="file"]::file-selector-button {
+    @apply btn-secondary -ml-3.5 -my-2.5 border-solid rounded-xl rounded-r-none mr-3.5;
+  }
+  .input[type="range"] {
+    @apply appearance-none outline-none h-6;
+  }
+  .input[type="range"]::-webkit-slider-thumb {
+    @apply outline-none appearance-none bg-primary w-6 h-6 rounded-full cursor-pointer p-0 m-0 -mt-2 focus:ring-2;
+  }
+  .input[type="range"]:focus::-webkit-slider-thumb {
+    @apply ring-2 ring-offset-2 ring-primary;
+  }
+  .input[type="range"]::-webkit-slider-runnable-track {
+    @apply bg-input h-2 rounded-full;
+  }
+  .input[type="range"]::-moz-range-thumb {
+    @apply outline-none appearance-none bg-primary w-6 h-6 rounded-full cursor-pointer p-0 m-0 border-0 focus:ring-2;
+  }
+  .input[type="range"]:focus::-moz-range-thumb {
+    @apply ring-2 ring-offset-2 ring-primary;
+  }
+  .input[type="range"]::-moz-range-track {
+    @apply bg-input h-2 rounded-full border-0;
+  }
+  .input[type="range"]::-ms-thumb {
+    @apply outline-none appearance-none bg-primary w-6 h-6 rounded-full cursor-pointer p-0 m-0 border-0 focus:ring-2;
+  }
+  .input[type="range"]:focus::-ms-thumb {
+    @apply ring-2 ring-offset-2 ring-primary;
+  }
+  .input[type="range"]::-ms-track {
+    @apply bg-input h-2 rounded-full border-0;
+    color: transparent;
+  }
+  .input[type="range"]::-ms-fill-lower {
+    @apply bg-primary rounded-full;
+  }
+  .input[type="range"]::-ms-fill-upper {
+    @apply bg-input rounded-full;
+  }
+  .form label {
+    @apply label;
+  }
+  .form input {
+    @apply input;
+  }
 }
 
 /* Typography */
@@ -382,20 +464,4 @@
   .prose b {
     @apply font-semibold;
   }
-}
-
-input[type="color"] {
-  @apply aspect-square w-10 h-10 border-2 border-border rounded-lg;
-}
-
-.input[type="radio"] {
-  @apply outline-none appearance-none border-blue-400;
-}
-
-input[type="file"] {
-  @apply font-medium;
-}
-
-input[type="file"]::file-selector-button {
-  @apply btn-sm-secondary mr-2 border-solid;
 }
