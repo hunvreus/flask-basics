@@ -1,0 +1,46 @@
+{% macro dialog(id=None, trigger=None, title=None) %}
+<span
+  x-data="{ active: false }"
+  {% if id %}
+  id="{{ id }}"
+  x-init="
+    if (!$store.dialogInitialized) {
+      Alpine.magic('dialog', () => id => Alpine.$data(document.querySelector('#' + id)).active = true);
+      $store.dialogInitialized = true;
+    }
+  "
+  {% endif %}
+>
+  {% if trigger %}
+  <span
+    @click="active = true"
+    aria-expanded="false"
+    :aria-expanded="active"
+  >
+    {{ trigger }}
+  </span>
+  {% endif %}
+
+  <div
+    @click="$event.target === $el && (active = false)"
+    @keydown.escape.window="active && (active = false)"
+    x-cloak
+    class="dialog"
+    :class="{ 'active': active }"
+  >
+    <article>
+      <header>
+        {{ title | safe }}
+        <button
+          class="opacity-50 hover:opacity-100 transition-opacity"
+          @click="active = false"
+        >
+          <span class="sr-only">Close dialog</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </header>
+      {{ caller() }}
+    </article>
+  </div>
+</span>
+{% endmacro %}

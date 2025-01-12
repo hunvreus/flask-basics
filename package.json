@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "tailwindcss -i ./src/main.css -o ./app/static/assets/styles.css --watch",
+    "dev": "tailwindcss --silent -i ./src/main.css -o ./app/static/assets/styles.css --watch",
     "build": "tailwindcss -i ./src/main.css -o ./app/static/assets/styles.css --minify",
     "email": "mjml src/login.mjml -o app/templates/email/login.html",
     "favicon": "node scripts/favicon.mjs",

@@ -1,0 +1,39 @@
+{% macro dropdown(id=None, trigger=None, trigger_class=None, content_class=None) %}
+<span
+  x-data="{ active: false }"
+  @click.away="active = false"
+  class="dropdown"
+  {% if id %}id="{{ id }}"{% endif %}
+>
+  {% if trigger %}
+  <button
+    @click="active = !active"
+    aria-expanded="false"
+    :aria-expanded="active"
+    aria-haspopup="menu"
+    aria-pressed="false"
+    :aria-pressed="active"
+    {% if id %}
+    id="{{ id }}-trigger"
+    aria-controls="{{ id }}-content"
+    {% endif %}
+    {% if trigger_class %}class="{{ trigger_class }}"{% endif %}
+  >
+    {{ trigger }}
+  </button>
+  {% endif %}
+
+  <nav
+    @keydown.escape.window="active && (active = false)"
+    x-cloak
+    {% if id %}id="{{ id }}-content"{% endif %}
+    {% if content_class %}class="{{ content_class }}"{% endif %}
+    role="menu"
+    aria-orientation="vertical"
+    aria-hidden="true"
+    :aria-hidden="!active"
+  >
+    {{ caller() }}
+  </nav>
+</span>
+{% endmacro %}

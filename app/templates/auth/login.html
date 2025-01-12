@@ -13,8 +13,9 @@
             <div class="space-y-2">
                 {{ form.email(
                     size=320,
-                    class="w-full " + ("input-error" if form.email.errors else "input"),
-                    placeholder="Enter your email address"
+                    class="w-full input",
+                    placeholder="Enter your email address",
+                    **({'aria-invalid': 'true'} if form.email.errors else {})
                 ) }}
                 {% for error in form.email.errors %}
                 <p class="text-danger text-sm font-medium">{{ error }}</p>

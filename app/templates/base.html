@@ -1,6 +1,35 @@
 <!doctype html>
 <html>
 <head>
+  <!-- Theme -->
+  <script>
+  // Global theme toggle function
+  window.toggleTheme = function() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  function isDark() {
+    return localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  if (isDark()) {
+    document.documentElement.classList.add('dark');
+  }
+
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('theme', {
+      isDark: isDark(),
+
+      toggle() {
+        console.log('Toggle theme clicked');
+        this.isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+      }
+    });
+  });
+  </script>
+
   <meta charset="utf-8"/>
   <meta http-equiv="Content-Language" content="en"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -54,10 +83,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
 
   <!-- Additional head content (JS, CSS, etc.) -->
+  <script src="//unpkg.com/alpinejs" defer></script>
   {% block head %}{% endblock %}
 </head>
 <body>
-  {% include '_messages.html' %}
+  {% include 'components/notifications.html' %}
 
   {% include '_header.html' %}
 
