@@ -52,11 +52,11 @@
     --foreground: 0 0% 100%;
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 12%;
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 9%;
     --secondary-foreground: 0 0% 100%;
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
-    --popover: 0 0% 25%;
+    --popover: 0 0% 15%;
     --popover-foreground: 0 0% 100%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
@@ -128,6 +128,11 @@
   .btn-secondary,
   .btn-accent,
   .btn-danger,
+  .btn-xs,
+  .btn-xs-primary,
+  .btn-xs-secondary,
+  .btn-xs-accent,
+  .btn-xs-danger,
   .btn-sm,
   .btn-sm-primary,
   .btn-sm-secondary,
@@ -145,7 +150,14 @@
   .btn-secondary,
   .btn-accent,
   .btn-danger {
-    @apply px-5 py-2.5;
+    @apply px-4 py-2;
+  }
+  .btn-xs,
+  .btn-xs-primary,
+  .btn-xs-secondary,
+  .btn-xs-accent,
+  .btn-xs-danger {
+    @apply px-2 py-1 text-xs;
   }
   .btn-sm,
   .btn-sm-primary,
@@ -159,10 +171,12 @@
   .btn-lg-secondary,
   .btn-lg-accent,
   .btn-lg-danger {
-    @apply px-7 py-3.5 text-lg;
+    @apply px-6 py-3.5 text-lg;
   }
   .btn,
   .btn-primary,
+  .btn-xs,
+  .btn-xs-primary,
   .btn-sm,
   .btn-sm-primary,
   .btn-lg,
@@ -174,6 +188,7 @@
     }
   }
   .btn-secondary,
+  .btn-xs-secondary,
   .btn-sm-secondary,
   .btn-lg-secondary {
     @apply bg-secondary text-secondary-foreground border-border;
@@ -183,6 +198,7 @@
     }
   }
   .btn-accent,
+  .btn-xs-accent,
   .btn-sm-accent,
   .btn-lg-accent {
     @apply border-accent bg-accent text-accent-foreground;
@@ -192,6 +208,7 @@
     }
   }
   .btn-danger,
+  .btn-xs-danger,
   .btn-sm-danger,
   .btn-lg-danger {
     @apply border-danger bg-danger text-danger-foreground;
@@ -238,7 +255,7 @@
   .form select,
   textarea.input,
   .form textarea {
-    @apply bg-input border border-transparent px-3.5 py-2.5 rounded-2xl font-medium focus:ring-2 focus:ring-primary focus:outline-none transition-all;
+    @apply bg-input border border-transparent px-3 py-2 rounded-2xl font-medium focus:ring-2 focus:ring-primary focus:outline-none transition-all;
   }
   .input::placeholder,
   .form textarea::placeholder {
@@ -348,7 +365,7 @@
   .h4,
   .h5,
   .h6 {
-    @apply font-bold leading-tight tracking-tight;
+    @apply font-semibold leading-tight tracking-tight;
   }
   .h1 {
     @apply text-5xl;
@@ -388,6 +405,12 @@
   .unordered-list ul,
   .ordered-list ul {
     @apply list-disc list-outside ps-6;
+  }
+  .prose > *:first-child {
+    @apply !mt-0;
+  }
+  .prose > *:last-child {
+    @apply !mb-0;
   }
   .prose h1 {
     @apply h1 mb-8;
@@ -471,43 +494,35 @@
   }
 }
 
-/* Toast */
-@layer components {
-  .toasts {
-    @apply fixed bottom-0 right-0 z-50;
-  }
-  .toasts > li {
-    @apply bg-background rounded-xl p-4;
-  }
-}
-
 /* Dialog */
 @layer components {
-  .dialog {
-    @apply fixed inset-0 bg-black/80 overflow-y-auto z-50 transition-all flex items-center justify-center h-screen;
+  [role="dialog"] {
+    @apply fixed inset-0 bg-black/80 overflow-y-auto z-50 transition-all flex items-center justify-center h-screen invisible opacity-0;
   }
-  .dialog.active {
+  [role="dialog"]:not([inert]),
+  [role="dialog"][inert="false"] {
     @apply visible opacity-100;
   }
-  .dialog:not(.active) {
-    @apply invisible opacity-0;
+  [role="dialog"] > article {
+    @apply w-96 bg-background rounded-2xl p-4 shadow-lg transition-all max-h-[90vh] flex flex-col scale-90;
   }
-  .dialog > article {
-    @apply w-96 bg-background rounded-2xl p-4 shadow-lg transition-all max-h-[90vh] flex flex-col;
-  }
-  .dialog.active > article {
+  [role="dialog"]:not([inert]) > article,
+  [role="dialog"][inert="false"] > article {
     @apply scale-100;
   }
-  .dialog:not(.active) > article {
-    @apply scale-90;
-  }
-  .dialog > article > header {
+  [role="dialog"] > article > header {
     @apply font-semibold flex justify-between items-center pb-4 gap-x-2 text-lg;
   }
-  .dialog > article > main {
+  [role="dialog"] > article > header > h2 {
+    @apply text-lg font-semibold m-0;
+  }
+  [role="dialog"] > article > header > button {
+    @apply opacity-50 hover:opacity-100 transition-opacity;
+  }
+  [role="dialog"] > article > main {
     @apply overflow-y-auto flex-1 px-4 -mx-4;
   }
-  .dialog > article > footer {
+  [role="dialog"] > article > footer {
     @apply flex items-center justify-end pt-4 gap-x-2;
   }
 }
@@ -534,7 +549,7 @@
 /* Notifications */
 @layer components {
   .notifications {
-    @apply fixed bottom-0 left-1/2 -translate-x-1/2 p-6 space-y-2 pointer-events-none flex flex-col items-center;
+    @apply fixed bottom-0 left-1/2 -translate-x-1/2 p-6 space-y-2 pointer-events-none flex flex-col items-center z-40;
   }
   .notifications > [role="alert"],
   .notifications > [role="status"] {
@@ -555,10 +570,6 @@
       display: none;
     }
   }
-  .notifications > [role="alert"] > p,
-  .notifications > [role="status"] > p {
-    /* @apply truncate; */
-  }
   .notifications > [role="alert"] > button,
   .notifications > [role="status"] > button {
     @apply opacity-50 hover:opacity-100 transition-opacity;
@@ -571,7 +582,7 @@
     @apply relative;
   }
   [data-tooltip]:before {
-    @apply absolute content-[attr(data-tooltip)] bg-popover text-popover-foreground shadow text-xs font-medium rounded-lg px-2 py-1 pointer-events-none invisible opacity-0 truncate max-w-xs z-30 scale-95 transition-all;
+    @apply absolute content-[attr(data-tooltip)] bg-popover text-popover-foreground shadow text-xs font-medium rounded-lg px-2 py-1 pointer-events-none invisible opacity-0 truncate max-w-xs z-10 scale-95 transition-all;
   }
   [data-tooltip]:hover:before {
     @apply visible opacity-100 scale-100;

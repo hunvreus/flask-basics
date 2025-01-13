@@ -1,6 +1,6 @@
-{% macro dialog(id=None, trigger=None, title=None) %}
+{% macro dialog(id=None, trigger=None, title=None, trigger_class=None, modal_class=None, active=False) %}
 <span
-  x-data="{ active: false }"
+  x-data="{ active: {{ 'true' if active else 'false' }} }"
   {% if id %}
   id="{{ id }}"
   x-init="
@@ -12,30 +12,47 @@
   {% endif %}
 >
   {% if trigger %}
-  <span
+  <button
     @click="active = true"
+    aria-controls="{{ id }}-dialog"
     aria-expanded="false"
     :aria-expanded="active"
+    {% if trigger_class %}class="{{ trigger_class }}"{% endif %}
   >
     {{ trigger }}
-  </span>
+  </button>
   {% endif %}
 
   <div
     @click="$event.target === $el && (active = false)"
     @keydown.escape.window="active && (active = false)"
     x-cloak
-    class="dialog"
-    :class="{ 'active': active }"
+    role="dialog"
+    inert
+    :inert="!active"
+    aria-modal="true"
+    {% if id %}
+    id="{{ id }}-dialog"
+    aria-labelledby="{{ id }}-title"
+    {% endif %}
   >
-    <article>
+    <article
+      {% if modal_class %}
+      class="{{ modal_class }}"
+      {% endif %}
+    >
       <header>
-        {{ title | safe }}
-        <button
-          class="opacity-50 hover:opacity-100 transition-opacity"
-          @click="active = false"
+        <h2
+          {% if id %}
+          id="{{ id }}-title"
+          {% endif %}
         >
-          <span class="sr-only">Close dialog</span>
+          {{ title | safe }}
+        </h2>
+        <button
+          @click="active = false"
+          aria-label="Close dialog"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </header>

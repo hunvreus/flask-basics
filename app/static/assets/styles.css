@@ -798,11 +798,11 @@ select {
   --foreground: 0 0% 100%;
   --primary: 0 0% 100%;
   --primary-foreground: 0 0% 12%;
-  --secondary: 0 0% 12%;
+  --secondary: 0 0% 9%;
   --secondary-foreground: 0 0% 100%;
   --accent: 217 91% 60%;
   --accent-foreground: 0 0% 100%;
-  --popover: 0 0% 25%;
+  --popover: 0 0% 15%;
   --popover-foreground: 0 0% 100%;
   --muted: 0 0% 15%;
   --muted-foreground: 0 0% 64%;
@@ -901,6 +901,11 @@ body {
   .btn-secondary,
   .btn-accent,
   .btn-danger,
+  .btn-xs,
+  .btn-xs-primary,
+  .btn-xs-secondary,
+  .btn-xs-accent,
+  .btn-xs-danger,
   .btn-sm,
   .btn-sm-primary,
   .btn-sm-secondary,
@@ -928,6 +933,11 @@ body {
   .btn-secondary:focus-visible,
   .btn-accent:focus-visible,
   .btn-danger:focus-visible,
+  .btn-xs:focus-visible,
+  .btn-xs-primary:focus-visible,
+  .btn-xs-secondary:focus-visible,
+  .btn-xs-accent:focus-visible,
+  .btn-xs-danger:focus-visible,
   .btn-sm:focus-visible,
   .btn-sm-primary:focus-visible,
   .btn-sm-secondary:focus-visible,
@@ -953,10 +963,23 @@ body {
   .btn-secondary,
   .btn-accent,
   .btn-danger {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.btn-xs,
+  .btn-xs-primary,
+  .btn-xs-secondary,
+  .btn-xs-accent,
+  .btn-xs-danger {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .btn-sm,
@@ -977,8 +1000,8 @@ body {
   .btn-lg-secondary,
   .btn-lg-accent,
   .btn-lg-danger {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-top: 0.875rem;
   padding-bottom: 0.875rem;
   font-size: 1.125rem;
@@ -987,6 +1010,8 @@ body {
 
 .btn,
   .btn-primary,
+  .btn-xs,
+  .btn-xs-primary,
   .btn-sm,
   .btn-sm-primary,
   .btn-lg,
@@ -1005,6 +1030,7 @@ body {
 }
 
 .btn-secondary,
+  .btn-xs-secondary,
   .btn-sm-secondary,
   .btn-lg-secondary {
   border-color: hsl(var(--border));
@@ -1017,6 +1043,7 @@ body {
 }
 
 .btn-accent,
+  .btn-xs-accent,
   .btn-sm-accent,
   .btn-lg-accent {
   border-color: hsl(var(--accent));
@@ -1033,6 +1060,7 @@ body {
 }
 
 .btn-danger,
+  .btn-xs-danger,
   .btn-sm-danger,
   .btn-lg-danger {
   border-color: hsl(var(--danger));
@@ -1106,10 +1134,10 @@ body {
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1561,10 +1589,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1589,10 +1617,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1617,10 +1645,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1645,10 +1673,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1673,10 +1701,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1701,10 +1729,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1729,10 +1757,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1757,10 +1785,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1785,10 +1813,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1813,10 +1841,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1841,10 +1869,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1869,10 +1897,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1897,10 +1925,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1925,10 +1953,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1953,10 +1981,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1981,10 +2009,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2009,10 +2037,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2037,10 +2065,10 @@ select.input:is(.dark *),
   border-width: 1px;
   border-color: transparent;
   background-color: hsl(var(--input));
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-weight: 500;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2461,7 +2489,7 @@ select.form input:is(.dark *) {
   .h4,
   .h5,
   .h6 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
 }
@@ -2508,8 +2536,16 @@ select.form input:is(.dark *) {
   line-height: 1.25rem;
 }
 
+.prose > *:first-child {
+  margin-top: 0px !important;
+}
+
+.prose > *:last-child {
+  margin-bottom: 0px !important;
+}
+
 .prose h1 {
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.025em;
   font-size: 3rem;
   line-height: 1;
@@ -2517,7 +2553,7 @@ select.form input:is(.dark *) {
 }
 
 .prose h2 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
   font-size: 1.875rem;
@@ -2527,7 +2563,7 @@ select.form input:is(.dark *) {
 }
 
 .prose h3 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
   font-size: 1.25rem;
@@ -2537,7 +2573,7 @@ select.form input:is(.dark *) {
 }
 
 .prose h4 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
   font-size: 1rem;
@@ -2547,7 +2583,7 @@ select.form input:is(.dark *) {
 }
 
 .prose h5 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
   font-size: 1rem;
@@ -2557,7 +2593,7 @@ select.form input:is(.dark *) {
 }
 
 .prose h6 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.025em;
   font-size: 1rem;
@@ -2719,7 +2755,8 @@ select.form input:is(.dark *) {
   border-bottom-width: 0px;
 }
 
-.dialog {
+[role="dialog"] {
+  visibility: hidden;
   position: fixed;
   inset: 0px;
   z-index: 50;
@@ -2729,30 +2766,25 @@ select.form input:is(.dark *) {
   justify-content: center;
   overflow-y: auto;
   background-color: rgb(0 0 0 / 0.8);
+  opacity: 0;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-.dialog.active {
+[role="dialog"]:not([inert]),
+  [role="dialog"][inert="false"] {
   visibility: visible;
   opacity: 1;
 }
 
-.dialog.\!active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.dialog:not(.active) {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.dialog > article {
+[role="dialog"] > article {
   display: flex;
   max-height: 90vh;
   width: 24rem;
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   flex-direction: column;
   border-radius: 1rem;
   background-color: hsl(var(--background));
@@ -2765,25 +2797,14 @@ select.form input:is(.dark *) {
   transition-duration: 150ms;
 }
 
-.dialog.active > article {
+[role="dialog"]:not([inert]) > article,
+  [role="dialog"][inert="false"] > article {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.dialog.\!active > article {
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dialog:not(.active) > article {
-  --tw-scale-x: .9;
-  --tw-scale-y: .9;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.dialog > article > header {
+[role="dialog"] > article > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2795,7 +2816,25 @@ select.form input:is(.dark *) {
   font-weight: 600;
 }
 
-.dialog > article > main {
+[role="dialog"] > article > header > h2 {
+  margin: 0px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+[role="dialog"] > article > header > button {
+  opacity: 0.5;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+[role="dialog"] > article > header > button:hover {
+  opacity: 1;
+}
+
+[role="dialog"] > article > main {
   margin-left: -1rem;
   margin-right: -1rem;
   flex: 1 1 0%;
@@ -2804,7 +2843,7 @@ select.form input:is(.dark *) {
   padding-right: 1rem;
 }
 
-.dialog > article > footer {
+[role="dialog"] > article > footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -2885,6 +2924,7 @@ select.form input:is(.dark *) {
   position: fixed;
   bottom: 0px;
   left: 50%;
+  z-index: 40;
   display: flex;
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2960,11 +3000,6 @@ select.form input:is(.dark *) {
   }
 }
 
-.notifications > [role="alert"] > p,
-  .notifications > [role="status"] > p {
-  /* @apply truncate; */
-}
-
 .notifications > [role="alert"] > button,
   .notifications > [role="status"] > button {
   opacity: 0.5;
@@ -2986,7 +3021,7 @@ select.form input:is(.dark *) {
   pointer-events: none;
   visibility: hidden;
   position: absolute;
-  z-index: 30;
+  z-index: 10;
   max-width: 20rem;
   --tw-scale-x: .95;
   --tw-scale-y: .95;
@@ -3085,18 +3120,6 @@ select.form input:is(.dark *) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
 .collapse {
   visibility: collapse;
 }
@@ -3184,6 +3207,10 @@ select.form input:is(.dark *) {
 
 .w-full {
   width: 100%;
+}
+
+.min-w-36 {
+  min-width: 9rem;
 }
 
 .max-w-md {
@@ -3352,22 +3379,12 @@ select.form input:is(.dark *) {
   color: hsl(var(--success));
 }
 
-.opacity-50 {
-  opacity: 0.5;
-}
-
 .outline {
   outline-style: solid;
 }
 
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-opacity {
-  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3388,8 +3405,6 @@ select.form input:is(.dark *) {
 
 /* Tables */
 
-/* Toast */
-
 /* Dialog */
 
 /* Dropdown */
@@ -3404,8 +3419,4 @@ select.form input:is(.dark *) {
 
 .hover\:underline:hover {
   text-decoration-line: underline;
-}
-
-.hover\:opacity-100:hover {
-  opacity: 1;
 }

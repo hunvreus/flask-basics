@@ -3,12 +3,6 @@
 <head>
   <!-- Theme -->
   <script>
-  // Global theme toggle function
-  window.toggleTheme = function() {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-
   function isDark() {
     return localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
   }
@@ -20,9 +14,7 @@
   document.addEventListener('alpine:init', () => {
     Alpine.store('theme', {
       isDark: isDark(),
-
       toggle() {
-        console.log('Toggle theme clicked');
         this.isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
       }
@@ -84,6 +76,7 @@
 
   <!-- Additional head content (JS, CSS, etc.) -->
   <script src="//unpkg.com/alpinejs" defer></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   {% block head %}{% endblock %}
 </head>
 <body>

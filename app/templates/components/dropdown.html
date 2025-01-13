@@ -1,4 +1,4 @@
-{% macro dropdown(id=None, trigger=None, trigger_class=None, content_class=None) %}
+{% macro dropdown(id=None, trigger=None, trigger_class=None, menu_class=None) %}
 <span
   x-data="{ active: false }"
   @click.away="active = false"
@@ -15,7 +15,7 @@
     :aria-pressed="active"
     {% if id %}
     id="{{ id }}-trigger"
-    aria-controls="{{ id }}-content"
+    aria-controls="{{ id }}-menu"
     {% endif %}
     {% if trigger_class %}class="{{ trigger_class }}"{% endif %}
   >
@@ -26,8 +26,8 @@
   <nav
     @keydown.escape.window="active && (active = false)"
     x-cloak
-    {% if id %}id="{{ id }}-content"{% endif %}
-    {% if content_class %}class="{{ content_class }}"{% endif %}
+    {% if id %}id="{{ id }}-menu"{% endif %}
+    {% if menu_class %}class="{{ menu_class }}"{% endif %}
     role="menu"
     aria-orientation="vertical"
     aria-hidden="true"
