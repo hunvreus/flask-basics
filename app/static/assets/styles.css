@@ -771,28 +771,6 @@ select {
   --input-placeholder: 0 0% 54.5%;
 }
 
-/*
-  --neutral-50:   0 0% 98%;    #fafafa
-  --neutral-100:  0 0% 96%;    #f5f5f5
-  --neutral-150:  0 0% 93%;    interpolated
-  --neutral-200:  0 0% 90%;    #e5e5e5
-  --neutral-250:  0 0% 86.5%;  interpolated
-  --neutral-300:  0 0% 83%;    #d4d4d4
-  --neutral-350:  0 0% 73.5%;  interpolated
-  --neutral-400:  0 0% 64%;    #a3a3a3
-  --neutral-450:  0 0% 54.5%;  #8b8b8b
-  --neutral-500:  0 0% 45%;    #737373
-  --neutral-550:  0 0% 38.5%;  #626262
-  --neutral-600:  0 0% 32%;    #525252
-  --neutral-650:  0 0% 28.5%;  #494949
-  --neutral-700:  0 0% 25%;    #404040
-  --neutral-750:  0 0% 20%;    #262626
-  --neutral-800:  0 0% 15%;    #171717
-  --neutral-850:  0 0% 12%;    #0a0a0a
-  --neutral-900:  0 0% 9%;     #0a0a0a
-  --neutral-950:  0 0% 4%;     #0a0a0a
-  */
-
 .dark {
   --background: 0 0% 9%;
   --foreground: 0 0% 100%;
@@ -3031,10 +3009,10 @@ select.form input:is(.dark *) {
   white-space: nowrap;
   border-radius: 0.5rem;
   background-color: hsl(var(--popover));
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
