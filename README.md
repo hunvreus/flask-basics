@@ -1,13 +1,23 @@
-This is a simple starter project for Flask apps (mostly ripped off from [Miguel Grinberg's awesome Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)).
+This is a simple and opiniated boilerplate for Flask apps (mostly ripped off from [Miguel Grinberg's awesome Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)).
+
+# Main features
+
+- Code organized in [Blueprints](https://flask.palletsprojects.com/en/stable/blueprints/)
+- i18n support with [Flask-Babel](https://python-babel.github.io/flask-babel/)
+- Forms with [Flask-WTForms](https://flask-wtf.readthedocs.io/en/1.2.x/)
+- Database ORM with SQLAlchemy (defaults to SQLite).
+- Email with [Resend](https://resend.com) and email templates with [MJML](https://mjml.io/).
+- CSS with [Tailwind CSS](https://tailwindcss.com/).
+- Javascript with [Alpine.js](https://alpinejs.dev/) and (optionally) [HTMX](https://htmx.org/).
 
 # Prerequisites
 
-- Python 3
-- Node.js and npm (if you plan on changing the CSS)
+- Python 3.
+- Node.js/npm for developement (CSS, email template, favicons, ...).
 
 # Install & Run
 
-1. Clone this repository and cd to the root in your terminal.
+1. **[Make a copy of this template](https://github.com/hunvreus/flask-basics/generate)** and `git clone` the repository you created.
 2. Create your virtual environment and activate it:
     ```
     python3 -m venv venv
@@ -17,9 +27,10 @@ This is a simple starter project for Flask apps (mostly ripped off from [Miguel 
     ```
     pip install -r requirements.txt 
     ```
-4. Create the tables (this will create an `app.db` SQLite file):
+4. Initiate your database migrations and create the tables:
     ```
-    flask db upgrade
+    flask db migrate # This will create a "migrations/" folder
+    flask db upgrade # This may create an "app.db" file
     ```
 5. Create your local environment configuration file:
     ```
@@ -29,33 +40,24 @@ This is a simple starter project for Flask apps (mostly ripped off from [Miguel 
     ```
     flask run
     ```
-7. Start your local emulated email server (in another terminal window/tab):
-    ```
-    python3 -m smtpd -n -c DebuggingServer localhost:8025
-    ```
 
-# Configure email
+# Environment variables
 
-The `.env.example` file you copied contains settings for the mail server:
+Variable | Default | Description
+--- | --- | ---
+`APP_NAME` | `"App name"` | The name of the app displayed in the header, emails, user messagse, etc.
+`APP_DESCRIPTION` | `None` | The default `<meta>` description, can be overriden for any route by defining the description template variable.
+`APP_SOCIAL_IMAGE` | `'/social.png'` | The image used for social cards.
+`MAIL_SENDER_NAME` | `APP_NAME` | The name used when sending emails.
+`MAIL_SENDER_EMAIL` | `'noreply@example.com'` | The email used when sending emails.
+`MAIL_LOGO` | `'/assets/logo/logo-72x72.png'` | Logo used in the HTML email template (see `app/templates/email/login.html`).
+`MAIL_FOOTER` | `None` | A text to be included in the footer of your emails (e.g. your business address).
+`SECRET_KEY` | `'random-unique-secret-key'` | [Secret key used for signing session cookies](https://flask.palletsprojects.com/en/stable/config/#SECRET_KEY).
+`SQLALCHEMY_DATABASE_URI` | `None` | [A valid database connection URI](https://flask-sqlalchemy.readthedocs.io/en/stable/config/#flask_sqlalchemy.config.SQLALCHEMY_DATABASE_URI). If undefined, the app will use an SQLite database saved at `app.db`.
+`RESEND_API_KEY` | `None` | The [Resend](https://resend.com) API key. If no key is provided (e.g. when developing on local), the content of the emails sent will be displayed in your terminal.
+`TEMPLATES_AUTO_RELOAD` | `False` | [Hot reload templates](https://flask.palletsprojects.com/en/stable/config/#TEMPLATES_AUTO_RELOAD) when they change (for development).
 
-```
-MAIL_SERVER = localhost
-MAIL_PORT = 8025
-```
-
-This works for running a local emulated email server for development.
-
-You can send real emails by commenting these two lines and uncommenting all of the lines above. You'll need to adjust the settings (the example assumes you'll use Sendgrid).
-
-# Modify CSS
-
-You will need to install [Tailwind CSS](https://tailwindcss.com/) and depdenceies by running `npm install`. You can modify the `/app/src/main.css` file and run the build process with the following command:
-
-```
-npx tailwindcss -i ./app/src/main.css -o ./app/static/main.css --watch
-```
-
-# Modify tables
+# Models
 
 Models are defined in `/app/models.py`. After making any change you will need to:
 
@@ -68,7 +70,7 @@ Models are defined in `/app/models.py`. After making any change you will need to
     flask db upgrade #undo with "downgrade"
     ```
 
-# Translation
+# i18n
 
 To create translations of your app strings:
 
@@ -94,7 +96,14 @@ pybabel extract -F babel.cfg -k _l -o messages.pot .
 pybabel update -i messages.pot -d app/translations
 ```
 
-# Todos
+# Assets (CSS, images, email template)
 
-- [ ] Create a better template for transactional emails
-- [ ] Add deployment instructions
+*To run any of the npm commands listed below, you need to install the dev depdendencies with `npm install`.*
+
+- **CSS**: You can modify the `/app/src/main.css` file and run the build process with `npm run css:build`, or `npm run css:dev` if you want to watch changes.
+- **Favicon**: These files are saved in `app/static/favicon/`. You can generate these files by editing the `src/favicon.svg` file and then running `npm run favicon`.
+- **Social cards** (OG and Twitter/X): These files are saved in `app/static/social/`. You can generate these files by editing the `src/social.svg` file and then running `npm run social`.
+- **Logo**: The logo is saved in both SVG and PNG formats at multiple resolutions in `app/static/logo`. You can generate these files by editing the `src/logo.svg` file and then running `npm run logo`.
+- **Email template**: The login email templates (HTML and text) are saved in `app/templates/email/`. The HTML version can be generated from the [MJML](https://mjml.io/) template defined at `src/login.mjml` by running the `npm run email` command.
+
+You can generate all assets at once by running the `npm run build` command.

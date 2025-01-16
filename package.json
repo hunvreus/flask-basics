@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "dev": "tailwindcss --silent -i ./src/main.css -o ./app/static/assets/styles.css --watch",
-    "build": "tailwindcss -i ./src/main.css -o ./app/static/assets/styles.css --minify",
+    "build": "npm run css:build && npm run email && npm run favicon && npm run logo && npm run social",
+    "css:dev": "tailwindcss --silent -i ./src/main.css -o ./app/static/assets/styles.css --watch",
+    "css:build": "tailwindcss -i ./src/main.css -o ./app/static/assets/styles.css --minify",
     "email": "mjml src/login.mjml -o app/templates/email/login.html",
     "favicon": "node scripts/favicon.mjs",
     "logo": "node scripts/logo.mjs",
