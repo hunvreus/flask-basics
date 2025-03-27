@@ -110,3 +110,5 @@ You can generate all assets at once by running the `npm run build` command.
 
 
 ok
+
+ok
