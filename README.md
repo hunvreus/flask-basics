@@ -2,6 +2,7 @@ This is a simple and opiniated boilerplate for Flask apps (mostly ripped off fro
 
 # Main features
 
+
 - Code organized in [Blueprints](https://flask.palletsprojects.com/en/stable/blueprints/)
 - i18n support with [Flask-Babel](https://python-babel.github.io/flask-babel/)
 - Forms with [Flask-WTForms](https://flask-wtf.readthedocs.io/en/1.2.x/)
