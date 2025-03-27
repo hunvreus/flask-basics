@@ -107,8 +107,3 @@ pybabel update -i messages.pot -d app/translations
 - **Email template**: The login email templates (HTML and text) are saved in `app/templates/email/`. The HTML version can be generated from the [MJML](https://mjml.io/) template defined at `src/login.mjml` by running the `npm run email` command.
 
 You can generate all assets at once by running the `npm run build` command.
-
-
-ok
-
-ok
