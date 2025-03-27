@@ -12,6 +12,7 @@ This is a simple and opiniated boilerplate for Flask apps (mostly ripped off fro
 
 # Prerequisites
 
+
 - Python 3.
 - Node.js/npm for developement (CSS, email template, favicons, ...).
 
