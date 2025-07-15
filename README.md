@@ -1,7 +1,6 @@
 This is a simple and opiniated boilerplate for Flask apps (mostly ripped off from [Miguel Grinberg's awesome Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)).
 
 # Main features
-
 - Code organized in [Blueprints](https://flask.palletsprojects.com/en/stable/blueprints/)
 - i18n support with [Flask-Babel](https://python-babel.github.io/flask-babel/)
 - Forms with [Flask-WTForms](https://flask-wtf.readthedocs.io/en/1.2.x/)
